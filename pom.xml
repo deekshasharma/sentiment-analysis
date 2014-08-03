@@ -3,9 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>sentiments</groupId>
 	<artifactId>sentiments</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>1.0</version>
-	<name>sentiments</name>
+    <modules>
+        <module>restservice</module>
+        <module>business</module>
+    </modules>
+    <name>sentiments</name>
 
 	<repositories>
 		<repository>
