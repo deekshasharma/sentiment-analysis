@@ -1,7 +1,8 @@
 package com.sentiments.analyzers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -12,7 +13,9 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class SentimentAnalyzer {
 
-    public TweetWithSentiment findSentiment(String line) {
+
+    public List<TweetWithSentiment> findSentiment(String line) {
+        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
         //  Create a StanfordCoreNLP object to construct a pipeline using the given annotators
         Properties props = new Properties();
@@ -41,7 +44,9 @@ public class SentimentAnalyzer {
             return null;
         }
         TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(line, toText(mainSentiment));
-        return tweetWithSentiment;
+        tweetWithSentimentList.add(tweetWithSentiment);
+//        return tweetWithSentiment;
+        return tweetWithSentimentList;
 
     }
 
@@ -63,10 +68,10 @@ public class SentimentAnalyzer {
         }
     }
 
-    public static void main(String[] args) {
-        SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
-        TweetWithSentiment tweetWithSentiment = sentimentAnalyzer
-                .findSentiment("RT @PeterPyke: Picture heroic #Israel soldier. Says all - Israeli soldier pointing gun at 2 year old child.");
-        System.out.println(tweetWithSentiment);
-    }
+//    public static void main(String[] args) {
+//        SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
+//        TweetWithSentiment tweetWithSentiment = sentimentAnalyzer
+//                .findSentiment("RT @PeterPyke: Picture heroic #Israel soldier. Says all - Israeli soldier pointing gun at 2 year old child.");
+//        System.out.println(tweetWithSentiment);
+//    }
 }

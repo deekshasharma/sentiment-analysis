@@ -14,10 +14,10 @@ public class TweetWithSentiment {
     public TweetWithSentiment() {
     }
 
-    public TweetWithSentiment(String line, String cssClass) {
+    public TweetWithSentiment(String line, String sentiment) {
         super();
         this.line = line;
-        this.sentiment = cssClass;
+        this.sentiment = sentiment;
     }
 
     public String getLine() {

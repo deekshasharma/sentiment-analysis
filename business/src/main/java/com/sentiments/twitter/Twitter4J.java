@@ -16,17 +16,18 @@ public class Twitter4J {
     private static String consumerKey = "I1gFVs8hhlckQY85PWHpAZhkB";
     private static String consumerSecret = "zRVeRPjCyGuJxMpNRsvKtQeA23xN5l5ijoKAwzTk3UI3mLFW8W";
 
+
     public static void main(String[] args) throws TwitterException, IOException {
 
         Twitter4J twitter4J = new Twitter4J();
-        List<Status> tweets = twitter4J.connectToTwitter();
+        List<Status> tweets = twitter4J.connectToTwitter("immigration reform");
         List<String> tweetText = twitter4J.getTweetText(tweets);
         System.out.println();
         twitter4J.removeRetweets(tweetText);
 
 
     }
-
+    /*
     public List<Status> connectToTwitter() throws TwitterException, IOException {
         Twitter twitter = TwitterFactory.getSingleton();
         AccessToken accessToken = new AccessToken(aToken, aSecret);
@@ -47,7 +48,29 @@ public class Twitter4J {
         }
         return (tweets);
     }
+    */
 
+    public List<Status> connectToTwitter(String searchKeyword) throws TwitterException, IOException {
+        Twitter twitter = TwitterFactory.getSingleton();
+        AccessToken accessToken = new AccessToken(aToken, aSecret);
+        twitter.setOAuthConsumer(consumerKey, consumerSecret);
+        twitter.setOAuthAccessToken(accessToken);
+
+        Query query = new Query(searchKeyword);
+        QueryResult queryResult = twitter.search(query);
+        List<Status> tweets = new ArrayList<>();
+
+        while (queryResult.hasNext())
+        {
+            if(tweets.size() > 100)
+            {
+                break;
+            }
+            tweets.addAll(queryResult.getTweets());
+
+        }
+        return (tweets);
+    }
 
     /*
     This method returns the list of text of each tweet given in the status list
@@ -60,7 +83,6 @@ public class Twitter4J {
         {
             tweetText.add(eachStatus.getText());
         }
-//        System.out.println(tweetText);
         return tweetText;
     }
 
@@ -76,12 +98,9 @@ public class Twitter4J {
             String text = iterator.next();
             if(text.contains("RT @"))
             {
-
-//                System.out.println(text);
                 iterator.remove();
             }
         }
-        System.out.println(tweetText);
         return tweetText;
     }
 
