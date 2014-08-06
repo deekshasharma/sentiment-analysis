@@ -14,8 +14,7 @@ import edu.stanford.nlp.util.CoreMap;
 public class SentimentAnalyzer {
 
 
-    public List<TweetWithSentiment> findSentiment(String line) {
-        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
+    public TweetWithSentiment findSentiment(String line) {
 
         //  Create a StanfordCoreNLP object to construct a pipeline using the given annotators
         Properties props = new Properties();
@@ -44,9 +43,7 @@ public class SentimentAnalyzer {
             return null;
         }
         TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(line, toText(mainSentiment));
-        tweetWithSentimentList.add(tweetWithSentiment);
-//        return tweetWithSentiment;
-        return tweetWithSentimentList;
+        return tweetWithSentiment;
 
     }
 
