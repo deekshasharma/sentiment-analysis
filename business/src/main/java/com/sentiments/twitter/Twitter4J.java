@@ -17,38 +17,16 @@ public class Twitter4J {
     private static String consumerSecret = "zRVeRPjCyGuJxMpNRsvKtQeA23xN5l5ijoKAwzTk3UI3mLFW8W";
 
 
-    public static void main(String[] args) throws TwitterException, IOException {
-
-        Twitter4J twitter4J = new Twitter4J();
-        List<Status> tweets = twitter4J.connectToTwitter("immigration reform");
-        List<String> tweetText = twitter4J.getTweetText(tweets);
-        System.out.println();
-        twitter4J.removeRetweets(tweetText);
-
-
-    }
-    /*
-    public List<Status> connectToTwitter() throws TwitterException, IOException {
-        Twitter twitter = TwitterFactory.getSingleton();
-        AccessToken accessToken = new AccessToken(aToken, aSecret);
-        twitter.setOAuthConsumer(consumerKey, consumerSecret);
-        twitter.setOAuthAccessToken(accessToken);
-
-        Query query = new Query("lang:en Israel");
-        QueryResult queryResult = twitter.search(query);
-        List<Status> tweets = new ArrayList<>();
-
-        while (queryResult.hasNext())
-        {
-            tweets.addAll(queryResult.getTweets());
-            if(tweets.size() > 50)
-            {
-                break;
-            }
-        }
-        return (tweets);
-    }
-    */
+//    public static void main(String[] args) throws TwitterException, IOException {
+//
+//        Twitter4J twitter4J = new Twitter4J();
+//        List<Status> tweets = twitter4J.connectToTwitter("immigration reform");
+//        List<String> tweetText = twitter4J.getTweetText(tweets);
+//        System.out.println();
+//        twitter4J.removeRetweets(tweetText);
+//
+//
+//    }
 
     public List<Status> connectToTwitter(String searchKeyword) throws TwitterException, IOException {
         Twitter twitter = TwitterFactory.getSingleton();
@@ -56,7 +34,7 @@ public class Twitter4J {
         twitter.setOAuthConsumer(consumerKey, consumerSecret);
         twitter.setOAuthAccessToken(accessToken);
 
-        Query query = new Query(searchKeyword);
+        Query query = new Query("lang:en "+searchKeyword);
         QueryResult queryResult = twitter.search(query);
         List<Status> tweets = new ArrayList<>();
 

@@ -1,5 +1,7 @@
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +15,10 @@ public class JacksonContextResolverImpl implements ContextResolver<ObjectMapper>
 
     public JacksonContextResolverImpl() {
         objectMapper = new ObjectMapper()
-                .configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false /* force ISO8601 */);
+                .configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false /* force ISO8601 */)
+                .configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true)
+                .configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, true)
+                .setSerializationInclusion(JsonSerialize.Inclusion.ALWAYS);
     }
 
     @Override
