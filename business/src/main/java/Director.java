@@ -10,6 +10,8 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.w3c.dom.Document;
+
 
 public class Director {
 
@@ -39,16 +41,17 @@ public class Director {
     /*
     This method returns the sentiments using AlchemyAPI
      */
-    private void getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+    private void getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
+    {
         SentimentAnalyzerAlchemy alchemy = new SentimentAnalyzerAlchemy();
 
+        for(String eachTweet: allTweets)
+        {
 
-//        for(String eachTweet: allTweets)
-//        {
-//
-//        }
 
-//        alchemy.getSentimentAlchemy("");
+        }
+
+//        alchemy.getSentiment("");
     }
 
     /*

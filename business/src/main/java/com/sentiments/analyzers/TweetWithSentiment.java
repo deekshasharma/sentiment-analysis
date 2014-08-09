@@ -11,7 +11,9 @@ public class TweetWithSentiment {
     private String line;
     private String sentiment;
 
-    public TweetWithSentiment() {
+    public TweetWithSentiment()
+    {
+
     }
 
     public TweetWithSentiment(String line, String sentiment) {
@@ -27,6 +29,7 @@ public class TweetWithSentiment {
     public String getSentiment() {
         return sentiment;
     }
+
 
     @Override
     public String toString() {
