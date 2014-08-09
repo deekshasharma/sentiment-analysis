@@ -25,7 +25,7 @@ public class ResourceSentiment {
     public Response sendSentiment(@PathParam("keyword") String keyword) throws TwitterException, IOException
     {
         Director director = new Director();
-        List<TweetWithSentiment> tweetWithSentimentList = director.getSentimentObjects(keyword);
+        List<TweetWithSentiment> tweetWithSentimentList = director.getSentimentObjectsNLP(keyword);
         return Response.ok(tweetWithSentimentList).build();
 
     }

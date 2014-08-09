@@ -1,7 +1,5 @@
 package com.sentiments.analyzers;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
