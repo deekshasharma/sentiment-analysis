@@ -1,6 +1,4 @@
-import com.sentiments.analyzers.SentimentAnalyzer;
-import com.sentiments.analyzers.SentimentAnalyzerAlchemy;
-import com.sentiments.analyzers.TweetWithSentiment;
+import com.sentiments.analyzers.*;
 import com.sentiments.twitter.Twitter4J;
 import org.xml.sax.SAXException;
 import twitter4j.Status;
@@ -39,38 +37,6 @@ public class Director {
     }
 
     /*
-    This method returns the sentiments using AlchemyAPI
-     */
-    private void getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
-    {
-        SentimentAnalyzerAlchemy alchemy = new SentimentAnalyzerAlchemy();
-
-        for(String eachTweet: allTweets)
-        {
-
-
-        }
-
-//        alchemy.getSentiment("");
-    }
-
-    /*
-    This method returns the list of tweetSentiment objects received from NLP Sentiment Analyzer
-     */
-    public List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
-     {
-        SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
-        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
-
-        for(String eachText : allTweets)
-        {
-            System.out.println(sentimentAnalyzer.findSentiment(eachText));
-            tweetWithSentimentList.add(sentimentAnalyzer.findSentiment(eachText));
-        }
-        return tweetWithSentimentList;
-    }
-
-    /*
     This method returns all the Tweets for a specific keyword. It does not contain reTweets
      */
     private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
@@ -81,7 +47,35 @@ public class Director {
         return reTweetsRemoved;
     }
 
+    /*
+    This method returns the sentiments using AlchemyAPI
+     */
+    private void getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
+    {
+        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
+        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
+        for(String eachTweet: allTweets)
+        {
+            System.out.println(alchemy.calculateSentiment(eachTweet).getLine());
+            System.out.println(alchemy.calculateSentiment(eachTweet).getSentiment());
+            tweetWithSentimentList.add(alchemy.calculateSentiment(eachTweet));
+        }
+    }
 
+    /*
+    This method returns the list of tweetSentiment objects received from NLP Sentiment Analyzer
+     */
+    public List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
+     {
+        NlpAlgorithmStrategy nlp = new NlpAlgorithmStrategy();
+        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
+        for(String eachText : allTweets)
+        {
+            System.out.println(nlp.calculateSentiment(eachText));
+            tweetWithSentimentList.add(nlp.calculateSentiment(eachText));
+        }
+        return tweetWithSentimentList;
+    }
 }
