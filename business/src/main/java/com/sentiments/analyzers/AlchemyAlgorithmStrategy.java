@@ -36,7 +36,6 @@ public class AlchemyAlgorithmStrategy implements SentimentCalcStrategy
         String sentiment = null;
         try {
             Document document = alchemyAPI.TextGetTextSentiment(tweet);
-            System.out.println("Getting the sentiment for: " + tweet);
             String xmlString = getStringFromDocument(document);
             sentiment = convertToDocumentObject(xmlString);
         } catch (SAXException e) {

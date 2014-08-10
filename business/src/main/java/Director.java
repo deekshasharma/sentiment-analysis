@@ -8,14 +8,16 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.w3c.dom.Document;
 
 
 public class Director {
 
+    private static AlchemyAlgorithmStrategy alchemy;
+    private static NlpAlgorithmStrategy nlp;
+
     public static void main(String[] args) throws TwitterException, IOException, ParserConfigurationException, XPathExpressionException, SAXException {
-         Director director = new Director();
-        director.getSentiment("Ukraine", "A");
+        Director director = new Director();
+        director.getSentiment("Iraq", "A");
     }
 
 
@@ -41,7 +43,7 @@ public class Director {
      */
     private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
         Twitter4J twitter4J = new Twitter4J();
-        List<Status> tweets = twitter4J.connectToTwitter(keyword);
+        List<Status> tweets = twitter4J.getAllStatus(keyword);
         List<String> tweetText = twitter4J.getTweetText(tweets);
         List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
         return reTweetsRemoved;
@@ -57,8 +59,8 @@ public class Director {
 
         for(String eachTweet: allTweets)
         {
-            System.out.println(alchemy.calculateSentiment(eachTweet).getLine());
-            System.out.println(alchemy.calculateSentiment(eachTweet).getSentiment());
+            System.out.println("Tweet = "+ alchemy.calculateSentiment(eachTweet).getLine());
+            System.out.println("Sentiment = "+alchemy.calculateSentiment(eachTweet).getSentiment());
             tweetWithSentimentList.add(alchemy.calculateSentiment(eachTweet));
         }
     }
@@ -73,7 +75,8 @@ public class Director {
 
         for(String eachText : allTweets)
         {
-            System.out.println(nlp.calculateSentiment(eachText));
+            System.out.println("Tweet = "+nlp.calculateSentiment(eachText).getLine());
+            System.out.println("Sentiment = "+nlp.calculateSentiment(eachText).getSentiment());
             tweetWithSentimentList.add(nlp.calculateSentiment(eachText));
         }
         return tweetWithSentimentList;
