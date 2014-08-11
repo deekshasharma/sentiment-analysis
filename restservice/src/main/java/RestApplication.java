@@ -8,8 +8,6 @@ public class RestApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-//        classes.add(Rest.class);
-        classes.add(Root.class);
         classes.add(ResourceSentiment.class);
         return Collections.unmodifiableSet(classes);
     }

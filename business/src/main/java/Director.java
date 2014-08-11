@@ -15,34 +15,33 @@ public class Director {
     private static AlchemyAlgorithmStrategy alchemy;
     private static NlpAlgorithmStrategy nlp;
 
-    public static void main(String[] args) throws TwitterException, IOException, ParserConfigurationException, XPathExpressionException, SAXException {
-        Director director = new Director();
-        director.getSentiment("Iraq", "A");
-    }
+//    public static void main(String[] args) throws TwitterException, IOException, ParserConfigurationException, XPathExpressionException, SAXException {
+//        Director director = new Director();
+//        director.getSentiment("Iraq", "A");
+//    }
 
 
-    private void getSentiment(String keyword, String choice) throws TwitterException, IOException, XPathExpressionException, SAXException, ParserConfigurationException
+    public List<TweetWithSentiment> getSentiment(String keyword, String choice) throws TwitterException, IOException, XPathExpressionException, SAXException, ParserConfigurationException
     {
         List<String> allTweets = getAllTweets(keyword);
+        System.out.println("Tweets collected and size is : "+allTweets.size());
         if (choice.equalsIgnoreCase("A"))
         {
-             getSentimentAlchemy(allTweets);
+            System.out.println("A is selected");
+             return getSentimentAlchemy(allTweets);
         }
-        else if(choice.equalsIgnoreCase("N"))
+        else
         {
-            getSentimentObjectsNLP(allTweets);
+            return getSentimentObjectsNLP(allTweets);
         }
-        else  //throw Invalid choice exception
-        {
-            System.out.printf("Invalid choice of algorithm");
-        }
+
     }
 
     /*
     This method returns all the Tweets for a specific keyword. It does not contain reTweets
      */
     private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
-        Twitter4J twitter4J = new Twitter4J();
+        Twitter4J twitter4J = Twitter4J.getInstance();
         List<Status> tweets = twitter4J.getAllStatus(keyword);
         List<String> tweetText = twitter4J.getTweetText(tweets);
         List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
@@ -52,7 +51,7 @@ public class Director {
     /*
     This method returns the sentiments using AlchemyAPI
      */
-    private void getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
+    private List<TweetWithSentiment> getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
     {
         AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
@@ -63,6 +62,7 @@ public class Director {
             System.out.println("Sentiment = "+alchemy.calculateSentiment(eachTweet).getSentiment());
             tweetWithSentimentList.add(alchemy.calculateSentiment(eachTweet));
         }
+        return tweetWithSentimentList;
     }
 
     /*

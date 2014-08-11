@@ -2,17 +2,39 @@ package com.sentiments.twitter;
 
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class Twitter4J {
+    private static String aToken = "171730389-nssFtwPcTzQvAAf63obf3YR8QYO8KnahffduJgto";
+    private static String aSecret = "DasPJdxxtzJICVyyLjScOBWvEPfPWGihzlgYpLIOddnU8";
+    private static String consumerKey = "I1gFVs8hhlckQY85PWHpAZhkB";
+    private static String consumerSecret = "zRVeRPjCyGuJxMpNRsvKtQeA23xN5l5ijoKAwzTk3UI3mLFW8W";
+    private static Twitter twitter = TwitterFactory.getSingleton();
 
+    private static Twitter4J ourInstance = new Twitter4J();
 
+    public static Twitter4J getInstance()
+    {
+        return ourInstance;
+    }
+
+    private Twitter4J()
+    {
+        AccessToken accessToken = new AccessToken(aToken, aSecret);
+        twitter.setOAuthConsumer(consumerKey, consumerSecret);
+        twitter.setOAuthAccessToken(accessToken);
+    }
+
+    /*
+    This method returns the List<Status> for a specific keyword
+     */
     public List<Status> getAllStatus(String searchKeyword) throws TwitterException, IOException {
-        Twitter twitter = TwitterFactory.getSingleton();
-        TwitterConnection connection = TwitterConnection.getInstance();
+
         Query query = new Query("lang:en "+searchKeyword);
         QueryResult queryResult = twitter.search(query);
         List<Status> tweets = new ArrayList<>();
@@ -29,8 +51,8 @@ public class Twitter4J {
     }
 
     /*
-    This method returns the list containing texts of all tweets in the status list
-     */
+   This method returns the list containing texts of all tweets in the status list
+    */
     public List<String> getTweetText(List<Status> tweets)
     {
         List<String> tweetText = new ArrayList<>();
@@ -61,8 +83,3 @@ public class Twitter4J {
         return tweetText;
     }
 }
-
-
-
-
-
