@@ -12,14 +12,7 @@ import java.util.List;
 
 public class Director {
 
-    private static AlchemyAlgorithmStrategy alchemy;
-    private static NlpAlgorithmStrategy nlp;
-
-//    public static void main(String[] args) throws TwitterException, IOException, ParserConfigurationException, XPathExpressionException, SAXException {
-//        Director director = new Director();
-//        director.getSentiment("Iraq", "A");
-//    }
-
+    private static SentimentCalcStrategy sentimentCalcStrategy;
 
     public List<TweetWithSentiment> getSentiment(String keyword, String choice) throws TwitterException, IOException, XPathExpressionException, SAXException, ParserConfigurationException
     {
@@ -27,14 +20,12 @@ public class Director {
         System.out.println("Tweets collected and size is : "+allTweets.size());
         if (choice.equalsIgnoreCase("A"))
         {
-            System.out.println("A is selected");
              return getSentimentAlchemy(allTweets);
         }
         else
         {
             return getSentimentObjectsNLP(allTweets);
         }
-
     }
 
     /*
@@ -53,14 +44,15 @@ public class Director {
      */
     private List<TweetWithSentiment> getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
     {
-        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
+//        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
+        sentimentCalcStrategy = new AlchemyAlgorithmStrategy();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
         for(String eachTweet: allTweets)
         {
-            System.out.println("Tweet = "+ alchemy.calculateSentiment(eachTweet).getLine());
-            System.out.println("Sentiment = "+alchemy.calculateSentiment(eachTweet).getSentiment());
-            tweetWithSentimentList.add(alchemy.calculateSentiment(eachTweet));
+            System.out.println("Tweet = "+ sentimentCalcStrategy.calculateSentiment(eachTweet).getLine());
+            System.out.println("Sentiment = "+sentimentCalcStrategy.calculateSentiment(eachTweet).getSentiment());
+            tweetWithSentimentList.add(sentimentCalcStrategy.calculateSentiment(eachTweet));
         }
         return tweetWithSentimentList;
     }
@@ -70,14 +62,15 @@ public class Director {
      */
     public List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
      {
-        NlpAlgorithmStrategy nlp = new NlpAlgorithmStrategy();
+//        NlpAlgorithmStrategy nlp = new NlpAlgorithmStrategy();
+         sentimentCalcStrategy = new NlpAlgorithmStrategy();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
         for(String eachText : allTweets)
         {
-            System.out.println("Tweet = "+nlp.calculateSentiment(eachText).getLine());
-            System.out.println("Sentiment = "+nlp.calculateSentiment(eachText).getSentiment());
-            tweetWithSentimentList.add(nlp.calculateSentiment(eachText));
+            System.out.println("Tweet = "+sentimentCalcStrategy.calculateSentiment(eachText).getLine());
+            System.out.println("Sentiment = "+sentimentCalcStrategy.calculateSentiment(eachText).getSentiment());
+            tweetWithSentimentList.add(sentimentCalcStrategy.calculateSentiment(eachText));
         }
         return tweetWithSentimentList;
     }
