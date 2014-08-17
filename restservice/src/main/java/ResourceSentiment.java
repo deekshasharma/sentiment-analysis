@@ -21,17 +21,6 @@ public class ResourceSentiment {
 
     }
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{keyword}")
-//    public Response sendSentiment(@PathParam("keyword") String keyword) throws TwitterException, IOException
-//    {
-//        Director director = new Director();
-//        List<TweetWithSentiment> tweetWithSentimentList = director.getSentimentObjectsNLP(keyword);
-//        return Response.ok(tweetWithSentimentList).build();
-//
-//    }
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,13 +53,5 @@ public class ResourceSentiment {
         return Response.ok(tweetWithSentimentList).build();
 
     }
-
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getTweets() {
-//        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment("tweet", "positive");
-//        List<TweetWithSentiment> responseObject = Arrays.asList(tweetWithSentiment, tweetWithSentiment);
-//        return Response.ok(responseObject).build();
-//    }
 
 }

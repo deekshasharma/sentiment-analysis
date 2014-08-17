@@ -44,7 +44,6 @@ public class Director {
      */
     private List<TweetWithSentiment> getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
     {
-//        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
         sentimentCalcStrategy = new AlchemyAlgorithmStrategy();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
@@ -62,7 +61,6 @@ public class Director {
      */
     public List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
      {
-//        NlpAlgorithmStrategy nlp = new NlpAlgorithmStrategy();
          sentimentCalcStrategy = new NlpAlgorithmStrategy();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
