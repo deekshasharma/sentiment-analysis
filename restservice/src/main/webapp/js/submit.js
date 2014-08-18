@@ -56,10 +56,6 @@ function renderResults(){
 }
 
 
-
-
-
-
 $(document).ready(function(){
     console.log("jQuery activated", results[0]);
 });
