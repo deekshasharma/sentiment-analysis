@@ -41,7 +41,7 @@ public class Twitter4J {
 
         while (queryResult.hasNext())
         {
-            if(tweets.size() > 100)
+            if(tweets.size() > 10)
             {
                 break;
             }

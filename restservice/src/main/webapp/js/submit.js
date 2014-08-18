@@ -36,8 +36,22 @@ var results = [{"line":"Police firing tear gas at protesters?\n\n@BarackObama, W
 function renderResults(){
     console.log("results:", results);
 
-    for(i = 0; i < results.length; i++) {
-         $("#123").append("<p>" + JSON.stringify(results[i]) + "</p>");
+    for(i = 0; i < results.length; i++)
+    {
+        console.log(results[i].sentiment.toLowerCase());
+        if(results[i].sentiment.toLowerCase() == "positive")
+        {
+            $("#results").append("<p class = \"bg-success\">" +JSON.stringify(results[i])+ "</p>");
+        }
+        else if(results[i].sentiment.toLowerCase() == "negative")
+        {
+           $("#results").append("<p class = \"bg-danger\">" +JSON.stringify(results[i])+ "</p>");
+        }
+        else
+        {
+           $("#results").append("<p class = \"bg-info\">" +JSON.stringify(results[i])+ "</p>");
+        }
+
     }
 }
 

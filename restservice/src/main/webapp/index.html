@@ -1,36 +1,36 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/submit.js"></script>
 
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/submit.js"></script>
+	<!--<h1>Sentiment Analysis</h1>-->
 </head>
+
 <body>
-<h1 align="center">Sentiment Analysis</h1>
 
-<form class="navbar-form navbar-left" role="search">
-    <div class="form-group">
-        <input id="searchTerm" type="text" class="form-control" placeholder="Search">
-    </div>
-    <div class="btn-group">
-        <div>
-            <button type="button" name="alchemy" class="btn btn-default" onclick="submitForm()">Alchemy Algorithm
-            </button>
-            <button type="button" name="nlp" class="btn" onclick="nlpAlgorithm()">NLP Algorithm</button>
-        </div>
-    </div>
-</form>
-<br/>
-
-<div id="123">
+<div id="searchform">
+	<form class="navbar-form navbar-left" role="search">
+		<div class="form-group">
+			<input id="searchTerm" type="text" class="form-control" placeholder="Search">
+		</div>
+		<div class="btn-group">
+			<div>
+				<button type="button" name="alchemy" class="btn btn-default" onclick="submitForm()">Alchemy Algorithm
+				</button>
+				<button type="button" name="nlp" class="btn" onclick="nlpAlgorithm()">NLP Algorithm</button>
+			</div>
+		</div>
+	</form>
 </div>
+
+<div id="results">
+</div>
+
 </body>
+
 </html>

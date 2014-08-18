@@ -13,7 +13,12 @@ import java.util.List;
 public class Director {
 
     private static SentimentCalcStrategy sentimentCalcStrategy;
+    private List<TweetWithSentiment> tweetWithSentimentList;
 
+
+    /*
+    This method returns the list of tweetWithSentiment objects for a given keyword.
+     */
     public List<TweetWithSentiment> getSentiment(String keyword, String choice) throws TwitterException, IOException, XPathExpressionException, SAXException, ParserConfigurationException
     {
         List<String> allTweets = getAllTweets(keyword);
@@ -22,10 +27,12 @@ public class Director {
         {
              return getSentimentAlchemy(allTweets);
         }
-        else
+        else if(choice.equalsIgnoreCase("N"))
         {
             return getSentimentObjectsNLP(allTweets);
         }
+        else
+            return getSentimentObjectAPI(allTweets);
     }
 
     /*
@@ -45,7 +52,7 @@ public class Director {
     private List<TweetWithSentiment> getSentimentAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException
     {
         sentimentCalcStrategy = new AlchemyAlgorithmStrategy();
-        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
+        tweetWithSentimentList = new ArrayList<>();
 
         for(String eachTweet: allTweets)
         {
@@ -59,12 +66,26 @@ public class Director {
     /*
     This method returns the list of tweetSentiment objects received from NLP Sentiment Analyzer
      */
-    public List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
+    private List<TweetWithSentiment> getSentimentObjectsNLP(List<String> allTweets)
      {
          sentimentCalcStrategy = new NlpAlgorithmStrategy();
-        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
+         tweetWithSentimentList = new ArrayList<>();
 
         for(String eachText : allTweets)
+        {
+            System.out.println("Tweet = "+sentimentCalcStrategy.calculateSentiment(eachText).getLine());
+            System.out.println("Sentiment = "+sentimentCalcStrategy.calculateSentiment(eachText).getSentiment());
+            tweetWithSentimentList.add(sentimentCalcStrategy.calculateSentiment(eachText));
+        }
+        return tweetWithSentimentList;
+    }
+
+
+    private List<TweetWithSentiment> getSentimentObjectAPI(List<String> allTweets)
+    {
+        sentimentCalcStrategy = APIStrategy.getInstance();
+        tweetWithSentimentList = new ArrayList<>();
+        for(String eachText: allTweets)
         {
             System.out.println("Tweet = "+sentimentCalcStrategy.calculateSentiment(eachText).getLine());
             System.out.println("Sentiment = "+sentimentCalcStrategy.calculateSentiment(eachText).getSentiment());

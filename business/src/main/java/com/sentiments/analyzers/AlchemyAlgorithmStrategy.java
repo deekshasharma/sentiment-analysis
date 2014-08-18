@@ -21,14 +21,15 @@ public class AlchemyAlgorithmStrategy implements SentimentCalcStrategy
 {
 
     private static final String API_KEY = "4d162d16826398e23c0d1eb17287bf1b06ca7492";
+//    private static final String API_KEY = "63f8b3d435204d533044873f1472f2e9bb739c84";
 
 
-    public static void main(String[] args) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
-        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
-        TweetWithSentiment tweetWithSentiment = alchemy.calculateSentiment("Its hard to get the result");
-        System.out.println("tweet = "+ tweetWithSentiment.getLine() );
-        System.out.println("Sentiment = " + tweetWithSentiment.getSentiment());
-    }
+//    public static void main(String[] args) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+//        AlchemyAlgorithmStrategy alchemy = new AlchemyAlgorithmStrategy();
+//        TweetWithSentiment tweetWithSentiment = alchemy.calculateSentiment("Its hard to get the result");
+//        System.out.println("tweet = "+ tweetWithSentiment.getLine() );
+//        System.out.println("Sentiment = " + tweetWithSentiment.getSentiment());
+//    }
 
     @Override
     public TweetWithSentiment calculateSentiment(String tweet) {
