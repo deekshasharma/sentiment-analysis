@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @Path("/twitter")
@@ -52,6 +53,11 @@ public class ResourceSentiment {
         }
         return Response.ok(tweetWithSentimentList).build();
 
+    }
+
+    private Iterator<TweetWithSentiment> getIterator()
+    {
+        return null;
     }
 
 }
