@@ -11,7 +11,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class NlpAlgorithmStrategy implements SentimentCalcStrategy{
     @Override
-    public TweetWithSentiment calculateSentiment(String tweet)
+    public TweetWithSentiment getTweetWithSentiment(String tweet)
     {
         //  Create a StanfordCoreNLP object to construct a pipeline using the given annotators
         Properties props = new Properties();
@@ -40,7 +40,6 @@ public class NlpAlgorithmStrategy implements SentimentCalcStrategy{
         }
         TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet, toText(mainSentiment));
         return tweetWithSentiment;
-
     }
 
     /*
@@ -63,13 +62,4 @@ public class NlpAlgorithmStrategy implements SentimentCalcStrategy{
                 return "";
         }
     }
-
-
-//    public static void main(String[] args) {
-//        SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
-//        TweetWithSentiment tweetWithSentiment = sentimentAnalyzer
-//                .findSentiment("RT @PeterPyke: Picture heroic #Israel soldier. Says all - Israeli soldier pointing gun at 2 year old child.");
-//        System.out.println(tweetWithSentiment);
-//    }
-
 }

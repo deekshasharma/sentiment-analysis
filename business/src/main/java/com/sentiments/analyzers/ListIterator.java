@@ -1,11 +1,10 @@
-package com.sentiments;
-import com.sentiments.analyzers.TweetWithSentiment;
+package com.sentiments.analyzers;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class ListIterator implements Iterator<TweetWithSentiment>
 {
+
     private List<TweetWithSentiment> tweetWithSentimentList;
     int currentIndex = 0;
 
@@ -14,8 +13,9 @@ public class ListIterator implements Iterator<TweetWithSentiment>
     */
     public ListIterator(List<TweetWithSentiment> tweetWithSentimentList)
     {
-      this.tweetWithSentimentList = tweetWithSentimentList;
+        this.tweetWithSentimentList = tweetWithSentimentList;
     }
+
     @Override
     public boolean hasNext()
     {
@@ -30,7 +30,7 @@ public class ListIterator implements Iterator<TweetWithSentiment>
     @Override
     public TweetWithSentiment next()
     {
-          TweetWithSentiment tweetWithSentiment = tweetWithSentimentList.get(currentIndex);
+        TweetWithSentiment tweetWithSentiment = tweetWithSentimentList.get(currentIndex);
         currentIndex += 1;
         return tweetWithSentiment;
     }
@@ -38,6 +38,6 @@ public class ListIterator implements Iterator<TweetWithSentiment>
     @Override
     public void remove()
     {
-
+        // do nothing
     }
 }

@@ -1,26 +1,16 @@
+import com.sentiments.analyzers.Director;
+import com.sentiments.analyzers.DirectorInterface;
 import com.sentiments.analyzers.TweetWithSentiment;
-import org.xml.sax.SAXException;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 @Path("/twitter")
 public class ResourceSentiment {
-
-    public ResourceSentiment()
-    {
-
-    }
 
 
     @GET
@@ -29,35 +19,26 @@ public class ResourceSentiment {
     public Response Sentiment(@QueryParam("keyword") String keyword,
                               @QueryParam("algorithm") String algorithm)
     {
-        Director director = new Director();
         List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
-        try
-        {
-            tweetWithSentimentList = director.getSentiment(keyword,algorithm);
+        Iterator<TweetWithSentiment> iterator = getIterator(keyword, algorithm);
 
-        } catch (XPathExpressionException e) {
-            System.out.println("Due to XPath Exception");
-
-        }catch(SAXException e1)
+        while (iterator.hasNext())
         {
-            System.out.println("Due to SAXException");
-        }catch(ParserConfigurationException e2)
-        {
-            System.out.println("Due to ParserConfig Exception");
-        } catch(TwitterException e3)
-        {
-            System.out.println("Error due to TwitterException");
-        }catch(IOException e4)
-        {
-            System.out.println("Error due to IOException");
+            tweetWithSentimentList.add(iterator.next());
         }
-        return Response.ok(tweetWithSentimentList).build();
-
+            return Response.ok(tweetWithSentimentList).build();
     }
 
-    private Iterator<TweetWithSentiment> getIterator()
+
+    /*
+    This method returns the iterator over the data structure
+     */
+    private Iterator<TweetWithSentiment> getIterator(String keyword,String algorithm)
     {
-        return null;
+        DirectorInterface director = new Director();
+        director.getSentiment(keyword,algorithm);
+        Iterator<TweetWithSentiment> iterator = director.createIterator();
+        return iterator;
     }
 
 }
