@@ -21,3 +21,7 @@ html, body, button {
 .bg-info{
     background-color: #3188A3
 }
+
+body{
+style:"background.image:url(background.jpg)"
+}
