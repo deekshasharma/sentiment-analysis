@@ -9,7 +9,7 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
 
 
-public class NlpAlgorithmStrategy implements SentimentCalcStrategy{
+public class NlpAlgorithmStrategy implements SentimentStrategy {
     @Override
     public TweetWithSentiment getTweetWithSentiment(String tweet)
     {

@@ -1,6 +1,6 @@
 package com.sentiments.analyzers;
 
-public interface SentimentCalcStrategy {
+public interface SentimentStrategy {
 
     public TweetWithSentiment getTweetWithSentiment(String tweet);
 }

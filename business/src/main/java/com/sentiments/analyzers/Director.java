@@ -1,6 +1,5 @@
 package com.sentiments.analyzers;
 
-import com.sentiments.analyzers.*;
 import com.sentiments.twitter.Twitter4J;
 import org.xml.sax.SAXException;
 import twitter4j.Status;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class Director implements DirectorInterface {
 
-    private static SentimentCalcStrategy sentimentCalcStrategy;
+    private static SentimentStrategy sentimentCalcStrategy;
     private List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
 

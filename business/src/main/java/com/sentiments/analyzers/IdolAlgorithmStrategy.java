@@ -1,12 +1,17 @@
 package com.sentiments.analyzers;
 
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.xerces.impl.io.UTF8Reader;
 import org.json.JSONObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
-public class IdolAlgorithmStrategy implements SentimentCalcStrategy{
+public class IdolAlgorithmStrategy implements SentimentStrategy {
 
     private static final String API_KEY = "c8dd6ad0-524f-46b3-88ce-ee3a1257f16f";
     private static IdolAlgorithmStrategy ourInstance = new IdolAlgorithmStrategy();
@@ -29,15 +34,22 @@ public class IdolAlgorithmStrategy implements SentimentCalcStrategy{
     }
 
     @Override
-    public TweetWithSentiment getTweetWithSentiment(String tweet)
-    {
-        WebTarget webTarget = client.target("https://api.idolondemand.com/1/api/sync/analyzesentiment/v1?text="+tweet+"&apikey="+API_KEY);
-        Response response = webTarget.request().get();
-        String result = response.readEntity(String.class);
-        String sentiment = parseJSON(result);
+    public TweetWithSentiment getTweetWithSentiment(String tweet) {
+        String encodedTweet = "";
+        try {
+            encodedTweet = URLEncoder.encode(tweet, "UTF-8").replaceAll(" ", "%20");
+        }catch (UnsupportedEncodingException e)
+        {
+            System.out.println("Encoding exception");
+        }
+            WebTarget webTarget = client.target("https://api.idolondemand.com/1/api/sync/analyzesentiment/v1?text=" + encodedTweet + "&apikey=" + API_KEY);
+            Response response = webTarget.request().get();
+            String result = response.readEntity(String.class);
+            String sentiment = parseJSON(result);
 
-        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet,sentiment);
-        return tweetWithSentiment;
+            TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet, sentiment);
+            return tweetWithSentiment;
+
     }
 
 
@@ -50,7 +62,4 @@ public class IdolAlgorithmStrategy implements SentimentCalcStrategy{
         JSONObject aggregate = jsonObject.getJSONObject("aggregate");
         return aggregate.getString("sentiment");
     }
-
-
-
 }

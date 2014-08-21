@@ -17,7 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class AlchemyAlgorithmStrategy implements SentimentCalcStrategy
+public class AlchemyAlgorithmStrategy implements SentimentStrategy
 {
 
     private static final String API_KEY = "4d162d16826398e23c0d1eb17287bf1b06ca7492";
