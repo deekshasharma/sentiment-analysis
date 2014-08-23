@@ -22,7 +22,8 @@ public class JacksonContextResolverImpl implements ContextResolver<ObjectMapper>
     }
 
     @Override
-    public ObjectMapper getContext(final Class<?> type) {
+    public ObjectMapper getContext(final Class<?> type)
+    {
         return objectMapper;
     }
 }

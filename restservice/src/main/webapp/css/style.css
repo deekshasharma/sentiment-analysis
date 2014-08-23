@@ -6,7 +6,7 @@ html, body, button {
 }
 
 #searchform {
-    background-color: cyan;
+    background-color: black;
     overflow: hidden;
 }
 
@@ -19,9 +19,10 @@ html, body, button {
 }
 
 .bg-info{
-    background-color: #3188A3
+    background-color: #AEE9E8
 }
 
-body{
+body
+{
 style:"background.image:url(background.jpg)"
 }
