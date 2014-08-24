@@ -16,19 +16,18 @@ public class TwitterDataset {
     private static final String TWITTER_DATA_PATH = "/Users/deeksha/IdeaProjects/sentiment-analysis-project/business/src/main/resources/tweets.txt";
 
 
-    public static void main(String[] args)
-    {
-        TwitterDataset twitterDataset = new TwitterDataset();
-        List<String> tweetText = twitterDataset.getTweetText();
-        System.out.println(tweetText);
-//        System.out.println(twitterDataset.removeRetweets(tweetText));
-
-    }
+//    public static void main(String[] args)
+//    {
+//        TwitterDataset twitterDataset = new TwitterDataset();
+//        List<String> tweetText = twitterDataset.getTweets();
+//        System.out.println(tweetText);
+//
+//    }
 
     /*
   This method returns the list containing texts of all tweets in the status list
    */
-    protected List<String> getTweetText()
+    public List<String> getTweets(String keyword)
     {
         List<String> tweetText = new ArrayList<>();
         try
@@ -38,17 +37,16 @@ public class TwitterDataset {
             BufferedReader br = new BufferedReader(new FileReader(file));
             while((eachLine = br.readLine()) != null)
             {
-                   tweetText.add(eachLine);
+                if(eachLine.toLowerCase().matches(".*\\b"+keyword.toLowerCase()+"\\b.*") && tweetText.size() <= 10)
+                {tweetText.add(eachLine);}
+
             }
 
         }catch (IOException e)
         {
             System.out.println("Error due to IOException");
         }
-
-
-
-        return tweetText;
+        return removeRetweets(tweetText);
     }
 
      /*

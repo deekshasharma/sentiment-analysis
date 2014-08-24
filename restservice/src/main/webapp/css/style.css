@@ -11,18 +11,27 @@ html, body, button {
 }
 
 .bg-success{
-    background-color: #A8CD1B;
+    background-color: #0DE8A8;
 }
 
 .bg-danger{
-    background-color: #EC7C7B
+    background-color: #E82C0C;
 }
 
 .bg-info{
-    background-color: #AEE9E8
+    background-color: #7ACEF8;
 }
 
 body
 {
 style:"background.image:url(background.jpg)"
+}
+
+#results{
+    padding-top: 50px;
+}
+
+.label label-success{
+padding-right: 50px;
+padding-top: 50px
 }
