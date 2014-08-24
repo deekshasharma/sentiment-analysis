@@ -15,7 +15,7 @@ public class JacksonContextResolverImpl implements ContextResolver<ObjectMapper>
 
     public JacksonContextResolverImpl() {
         objectMapper = new ObjectMapper()
-                .configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false /* force ISO8601 */)
+                .configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, true)
                 .configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, true)
                 .setSerializationInclusion(JsonSerialize.Inclusion.ALWAYS);

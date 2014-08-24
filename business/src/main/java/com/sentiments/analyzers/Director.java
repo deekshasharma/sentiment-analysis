@@ -1,6 +1,6 @@
 package com.sentiments.analyzers;
 
-import com.sentiments.twitter.TwitterDataset;
+import com.sentiments.twitter.TwitterDataSet;
 import org.xml.sax.SAXException;
 import twitter4j.TwitterException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -57,8 +57,8 @@ public class Director implements DirectorInterface {
 //    }
 
     private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
-        TwitterDataset dataset = new TwitterDataset();
-        return dataset.getTweets(keyword);
+        TwitterDataSet dataSet = new TwitterDataSet();
+        return dataSet.getTweets(keyword);
     }
 
     /*
