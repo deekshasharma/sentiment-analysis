@@ -22,6 +22,14 @@ html, body, button {
     background-color: #5bc0de;
 }
 
+.streaming{
+    padding-top: 10px;
+}
+
+#twitterButton{
+        background-color: #CBF5C9;
+}
+
 body
 {
 style:"background.image:url(background.jpg)"
@@ -33,5 +41,5 @@ style:"background.image:url(background.jpg)"
 
 .label label-success{
 padding-right: 50px;
-padding-top: 50px
+padding-top: 50px;
 }
