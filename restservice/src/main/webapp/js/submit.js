@@ -56,7 +56,7 @@ function renderResults(results)
     console.log("results from renderResults:", results);
     $("#results").empty();
     for(i = 0; i < results.length; i++)
-bb
+    {
         console.log(results[i].sentiment.toLowerCase());
         if(results[i].sentiment.toLowerCase() == "positive")
         {
