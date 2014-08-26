@@ -44,6 +44,8 @@ public class TwitterStreaming
             sampleEndpoint.stallWarnings(false);
             sampleEndpoint.languages(Lists.newArrayList("en"));
 
+            System.out.println("building client");
+
             // create a new basic client
             client = new ClientBuilder()
                     .name("tweets")
@@ -53,12 +55,14 @@ public class TwitterStreaming
                     .processor(new StringDelimitedProcessor(queue))
                     .build();
 
+            System.out.println("connecting client");
             // Create connection
             client.connect();
 
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Exception in building twitter client:" + e.getMessage());
+            e.printStackTrace();
         }
         return client;
     }

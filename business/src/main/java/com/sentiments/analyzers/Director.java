@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Director implements DirectorInterface {
 
-    private static SentimentStrategy sentimentCalcStrategy;
+    private static SentimentStrategy strategy;
     private List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
 
 
@@ -65,11 +65,11 @@ public class Director implements DirectorInterface {
     This method send the tweets to Alchemy and update tweetWithSentimentList.
      */
     private void sendTweetsToAlchemy(List<String> allTweets) throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
-        sentimentCalcStrategy = new AlchemyAlgorithmStrategy();
+        strategy = new AlchemyAlgorithmStrategy();
 
         for (String eachTweet : allTweets)
         {
-            tweetWithSentimentList.add(sentimentCalcStrategy.getTweetWithSentiment(eachTweet));
+            tweetWithSentimentList.add(strategy.getTweetWithSentiment(eachTweet));
         }
     }
 
@@ -77,10 +77,10 @@ public class Director implements DirectorInterface {
     This method send the tweets to NLP and update tweetWithSentimentList.
      */
     private void sendTweetsToNLP(List<String> allTweets) {
-        sentimentCalcStrategy = new NlpAlgorithmStrategy();
+        strategy = new NlpAlgorithmStrategy();
 
         for (String eachText : allTweets) {
-            tweetWithSentimentList.add(sentimentCalcStrategy.getTweetWithSentiment(eachText));
+            tweetWithSentimentList.add(strategy.getTweetWithSentiment(eachText));
         }
     }
 
@@ -88,10 +88,10 @@ public class Director implements DirectorInterface {
         This method send the tweets to Alchemy and update tweetWithSentimentList.
      */
     private void sendTweetsToIdol(List<String> allTweets) {
-        sentimentCalcStrategy = IdolAlgorithmStrategy.getInstance();
+        strategy = IdolAlgorithmStrategy.getInstance();
 
         for (String eachText : allTweets) {
-            tweetWithSentimentList.add(sentimentCalcStrategy.getTweetWithSentiment(eachText));
+            tweetWithSentimentList.add(strategy.getTweetWithSentiment(eachText));
         }
     }
 

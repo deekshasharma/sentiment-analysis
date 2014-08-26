@@ -1,7 +1,5 @@
 package com.sentiments.twitter;
 
-import twitter4j.Status;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,19 +8,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TwitterDataset {
+public class TwitterDataSet {
 
 
     private static final String TWITTER_DATA_PATH = "/Users/deeksha/IdeaProjects/sentiment-analysis-project/business/src/main/resources/tweets.txt";
 
-
-//    public static void main(String[] args)
-//    {
-//        TwitterDataset twitterDataset = new TwitterDataset();
-//        List<String> tweetText = twitterDataset.getTweets();
-//        System.out.println(tweetText);
-//
-//    }
 
     /*
   This method returns the list containing texts of all tweets in the status list

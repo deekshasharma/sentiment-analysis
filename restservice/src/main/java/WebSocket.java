@@ -19,32 +19,36 @@ public class WebSocket {
     }
 
     @OnMessage
-    private void getStreamOfTweets(String handshake, Session session) throws IOException, InterruptedException
-    {
-//        TwitterStreaming twitterStreaming = TwitterStreaming.getInstance();
+    private void getStreamOfTweets(String handshake, Session session) throws IOException, InterruptedException {
+//        Client twitterStreaming = TwitterStreaming.getInstance();
         Client client = TwitterStreaming.getInstance();
         while (session.getOpenSessions().isEmpty() == false) {
             for (Session session1 : session.getOpenSessions()) {
                 System.out.println("received");
-//                try {
-//                    String tweet = twitterStreaming.getQueue().take();
-//                System.out.println("twitterStreaming.getQueue()");
-//                    String tweetText = twitterStreaming.parseJSON(tweet);
-//                    SentimentStrategy sentimentStrategy = new NlpAlgorithmStrategy();
-//                    TweetWithSentiment tweetWithSentiment = sentimentStrategy.getTweetWithSentiment(tweetText);
-//                    System.out.println(tweetWithSentiment.toString());
+                session1.getAsyncRemote().sendText("working!");
+/*
+                try {
+                    System.out.println("twitterStreaming.getQueue()");
+                    String tweet = twitterStreaming.getQueue().take();
+                    String tweetText = twitterStreaming.parseJSON(tweet);
+                    SentimentStrategy sentimentStrategy = new NlpAlgorithmStrategy();
+                    TweetWithSentiment tweetWithSentiment = sentimentStrategy.getTweetWithSentiment(tweetText);
+                    System.out.println(tweetWithSentiment.toString());
                     session1.getAsyncRemote().sendText("received");
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+*/
             }
         }
     }
 
     @OnError
-    private void logError(final Throwable t) {
-        System.out.println("Error in WebSocket API:" + t.getCause());
+    public void onError(final Throwable t, final Session session) {
+        System.out.println("error: " + t.getMessage());
+        System.out.println("closing session: " + session);
+        t.printStackTrace();
     }
 
     @OnClose
