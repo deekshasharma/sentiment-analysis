@@ -24,22 +24,18 @@ public class WebSocket {
         Client client = TwitterStreaming.getInstance();
         while (session.getOpenSessions().isEmpty() == false) {
             for (Session session1 : session.getOpenSessions()) {
-                System.out.println("received");
-                session1.getAsyncRemote().sendText("working!");
-/*
                 try {
-                    System.out.println("twitterStreaming.getQueue()");
-                    String tweet = twitterStreaming.getQueue().take();
-                    String tweetText = twitterStreaming.parseJSON(tweet);
-                    SentimentStrategy sentimentStrategy = new NlpAlgorithmStrategy();
-                    TweetWithSentiment tweetWithSentiment = sentimentStrategy.getTweetWithSentiment(tweetText);
-                    System.out.println(tweetWithSentiment.toString());
-                    session1.getAsyncRemote().sendText("received");
+                    String tweet = TwitterStreaming.getQueue().take();
+                    String tweetText = TwitterStreaming.parseJSON(tweet);
+                    if(tweetText != null){
+                    System.out.println(tweetText);
+                    session1.getAsyncRemote().sendText(tweetText);}
+//                    SentimentStrategy sentimentStrategy = new NlpAlgorithmStrategy();
+//                    TweetWithSentiment tweetWithSentiment = sentimentStrategy.getTweetWithSentiment(tweetText);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e.getCause());
                 }
-*/
             }
         }
     }
