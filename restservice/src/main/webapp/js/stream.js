@@ -16,8 +16,20 @@ function twitterStream()
           connection.onerror = function(error) {
             console.log('WebSocket Error ' + error);
           };
-          connection.onmessage = function(e) {
-            $("#streamResults").append("<p class = \"bg-success\">" +JSON.stringify(e.data)+ "</p>");
+          connection.onmessage = function(e)
+          {
+            var parseToJSON = JSON.parse(e.data);
+            if(parseToJSON["sentiment"].toLowerCase() == "positive")
+            {
+                $("#streamResults").prepend("<p class = \"bg-success\">" +JSON.stringify(parseToJSON.line)+ "</p>");
+            }
+            else if(parseToJSON["sentiment"].toLowerCase() == "negative")
+            {
+                $("#streamResults").prepend("<p class = \"bg-danger\">" +JSON.stringify(parseToJSON.line)+ "</p>");
+            }else
+            {
+                $("#streamResults").prepend("<p class = \"bg-info\">" +JSON.stringify(parseToJSON.line)+ "</p>");
+            }
             console.log(e);
           };
 }

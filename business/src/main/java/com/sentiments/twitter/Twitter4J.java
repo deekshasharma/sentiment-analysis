@@ -33,7 +33,24 @@ public class Twitter4J {
     /*
     This method returns the List<Status> for a specific keyword
      */
-    public List<Status> getAllStatus(String searchKeyword) throws TwitterException, IOException {
+//    public List<Status> getAllStatus(String searchKeyword) throws TwitterException, IOException {
+//
+//        Query query = new Query("lang:en "+searchKeyword);
+//        QueryResult queryResult = twitter.search(query);
+//        List<Status> tweets = new ArrayList<>();
+//
+//        while (queryResult.hasNext())
+//        {
+//            if(tweets.size() > 10)
+//            {
+//                break;
+//            }
+//            tweets.addAll(queryResult.getTweets());
+//        }
+//        return (tweets);
+//    }
+
+    public List<String> getData(String searchKeyword) throws TwitterException, IOException {
 
         Query query = new Query("lang:en "+searchKeyword);
         QueryResult queryResult = twitter.search(query);
@@ -47,8 +64,10 @@ public class Twitter4J {
             }
             tweets.addAll(queryResult.getTweets());
         }
-        return (tweets);
+        List<String> tweetText = getTweetText(tweets);
+        return (removeRetweets(tweetText));
     }
+
 
     /*
    This method returns the list containing texts of all tweets in the status list

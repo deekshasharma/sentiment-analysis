@@ -1,6 +1,7 @@
 package com.sentiments.analyzers;
 
 import com.sentiments.twitter.TwitterDataSet;
+import com.sentiments.twitter.Twitter4J;
 import org.xml.sax.SAXException;
 import twitter4j.TwitterException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -48,13 +49,14 @@ public class Director implements DirectorInterface {
     /*
     This method returns all the Tweets for a specific keyword. It does not contain reTweets
      */
-//    private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
-//        Twitter4J twitter4J = Twitter4J.getInstance();
+    private List<String> getTweetsFromTwitter(String keyword) throws TwitterException, IOException {
+        Twitter4J twitter4J = Twitter4J.getInstance();
 //        List<Status> tweets = twitter4J.getAllStatus(keyword);
 //        List<String> tweetText = twitter4J.getTweets(tweets);
 //        List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
-//        return reTweetsRemoved;
-//    }
+        List<String> tweetText = twitter4J.getData(keyword);
+        return tweetText;
+    }
 
     private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
         TwitterDataSet dataSet = new TwitterDataSet();

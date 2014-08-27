@@ -23,7 +23,7 @@ public class TweetWithSentiment {
 
     @Override
     public String toString() {
-        return "TweetWithSentiment [line=" + line + ", sentiment=" + sentiment + "]";
+        return "[line=" + line + ", sentiment=" + sentiment + "]";
     }
 
 }
