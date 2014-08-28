@@ -6,40 +6,53 @@ html, body, button {
 }
 
 #searchform {
-    background-color: black;
+    background-color: white;
     overflow: hidden;
 }
 
 .bg-success{
-    background-color: #5cb85c;
+    background-color: #A4D967;
+    font-size: 2em;
 }
 
 .bg-danger{
-    background-color: #d9534f;
+    background-color: #D7A6AA;
+    font-size: 2em;
 }
 
 .bg-info{
-    background-color: #5bc0de;
+    background-color: #99CDF2;
+    font-size: 2em;
 }
 
 .streaming{
     padding-top: 10px;
 }
 
-#twitterButton{
-        background-color: #CBF5C9;
-}
-
-body
-{
-style:"background.image:url(background.jpg)"
-}
-
 #results{
     padding-top: 50px;
 }
 
-.label label-success{
-padding-right: 50px;
-padding-top: 50px;
+.sentimentLabels {
+    padding-top: 1em;
 }
+
+.label-success{
+    font-size: 1.5em;
+    background-color: #A4D967;
+}
+
+.label-danger{
+    font-size: 1.5em;
+    background-color: #D7A6AA;
+}
+
+.label-info{
+    font-size: 1.5em;
+    background-color: #99CDF2;
+}
+
+form.navbar-form.navbar-left{
+    padding-left: 26em;
+}
+

@@ -1,6 +1,6 @@
 package com.sentiments.analyzers;
 
-public class TweetWithSentiment implements Tweet{
+public class TweetWithSentiment{
 
     private String tweetText;
     private String sentiment;
@@ -12,7 +12,6 @@ public class TweetWithSentiment implements Tweet{
         this.sentiment = sentiment;
     }
 
-    @Override
     public String getTweet() {
         return tweetText;
     }
