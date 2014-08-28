@@ -10,7 +10,7 @@ public class RestApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        classes.add(ResourceSentiment.class);
+        classes.add(RestEndPoint.class);
         return Collections.unmodifiableSet(classes);
     }
 

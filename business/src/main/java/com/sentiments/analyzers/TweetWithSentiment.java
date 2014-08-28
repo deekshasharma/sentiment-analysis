@@ -2,18 +2,18 @@ package com.sentiments.analyzers;
 
 public class TweetWithSentiment {
 
-    private String line;
+    private String tweetText;
     private String sentiment;
 
 
-    public TweetWithSentiment(String line, String sentiment) {
+    public TweetWithSentiment(String tweetText, String sentiment) {
         super();
-        this.line = line;
+        this.tweetText = tweetText;
         this.sentiment = sentiment;
     }
 
-    public String getLine() {
-        return line;
+    public String getTweet() {
+        return tweetText;
     }
 
     public String getSentiment() {
@@ -23,7 +23,7 @@ public class TweetWithSentiment {
 
     @Override
     public String toString() {
-        return "[line=" + line + ", sentiment=" + sentiment + "]";
+        return "[tweetText=" + tweetText + ", sentiment=" + sentiment + "]";
     }
 
 }

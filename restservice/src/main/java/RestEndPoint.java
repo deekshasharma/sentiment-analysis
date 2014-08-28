@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Path("/twitter")
-public class ResourceSentiment {
+public class RestEndPoint {
 
 
     @GET

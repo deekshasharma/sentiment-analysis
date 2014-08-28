@@ -60,15 +60,15 @@ function renderResults(results)
         console.log(results[i].sentiment.toLowerCase());
         if(results[i].sentiment.toLowerCase() == "positive")
         {
-            $("#results").append("<p class = \"bg-success\">" +JSON.stringify(results[i].line)+ "</p>");
+            $("#results").append("<p class = \"bg-success\">" +JSON.stringify(results[i].tweet)+ "</p>");
         }
         else if(results[i].sentiment.toLowerCase() == "negative")
         {
-           $("#results").append("<p class = \"bg-danger\">" +JSON.stringify(results[i].line)+ "</p>");
+           $("#results").append("<p class = \"bg-danger\">" +JSON.stringify(results[i].tweet)+ "</p>");
         }
         else
         {
-           $("#results").append("<p class = \"bg-info\">" +JSON.stringify(results[i].line)+ "</p>");
+           $("#results").append("<p class = \"bg-info\">" +JSON.stringify(results[i].tweet)+ "</p>");
         }
     }
 }
