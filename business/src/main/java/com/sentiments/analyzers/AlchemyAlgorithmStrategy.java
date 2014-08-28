@@ -42,7 +42,7 @@ public class AlchemyAlgorithmStrategy implements SentimentStrategy
         } catch (IOException e3) {
             System.out.println("Due to IOException");
         }
-        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet,sentiment);
+        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet,sentiment).build();
         return tweetWithSentiment;
     }
 

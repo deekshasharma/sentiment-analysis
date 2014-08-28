@@ -47,7 +47,7 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
             String result = response.readEntity(String.class);
             String sentiment = parseJSON(result);
 
-            TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet, sentiment);
+            TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet, sentiment).build();
             return tweetWithSentiment;
 
     }

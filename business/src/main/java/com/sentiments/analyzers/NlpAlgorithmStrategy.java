@@ -38,7 +38,7 @@ public class NlpAlgorithmStrategy implements SentimentStrategy {
         if ( mainSentiment > 4 || mainSentiment < 0) {
             return null;
         }
-        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(tweet, toText(mainSentiment));
+        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet,toText(mainSentiment)).build();
         return tweetWithSentiment;
     }
 
