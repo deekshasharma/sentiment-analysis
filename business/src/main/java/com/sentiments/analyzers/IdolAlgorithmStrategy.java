@@ -1,12 +1,9 @@
 package com.sentiments.analyzers;
 
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.xerces.impl.io.UTF8Reader;
 import org.json.JSONObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -14,7 +11,7 @@ import java.net.URLEncoder;
 public class IdolAlgorithmStrategy implements SentimentStrategy {
 
     private static final String API_KEY = "c8dd6ad0-524f-46b3-88ce-ee3a1257f16f";
-    private static IdolAlgorithmStrategy ourInstance = new IdolAlgorithmStrategy();
+    private static IdolAlgorithmStrategy idolInstance = new IdolAlgorithmStrategy();
     private Client client;
 
     /*
@@ -22,7 +19,7 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
      */
     public static IdolAlgorithmStrategy getInstance()
     {
-        return ourInstance;
+        return idolInstance;
     }
 
     /*
