@@ -28,6 +28,9 @@ public class TwitterStreaming {
     private static Client client;
 
 
+    /*
+    This method returns the Singleton of HoseBird Client
+     */
     public static Client getInstance() {
         try {
             if (client == null)
@@ -54,9 +57,13 @@ public class TwitterStreaming {
 
             }}catch(Exception e){
                 System.out.println("Exception in building twitter client:" + e.getMessage());
-                e.printStackTrace();
             }
         return client;
+    }
+
+    public void notifyWebSocket()
+    {
+
     }
 
     /*

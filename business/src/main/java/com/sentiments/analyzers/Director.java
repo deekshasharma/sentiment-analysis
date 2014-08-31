@@ -20,6 +20,10 @@ public class Director implements DirectorInterface {
 
     /*
     This method returns the list of tweetWithSentiment objects for a given keyword.
+    ///////ALERT !!! This is incorrect implementation of Strategy pattern. You must not route the calculation to different
+    strategies. The method getSentiment should look like this :
+    public void getSentiment(String keyword, SentimentStrategy strategy) and then at run time it should be called.
+    Also please make the decision of calling the respective strategy inside the RestEndPoint class.
      */
     public void getSentiment(String keyword, String algorithm) //throws TwitterException, IOException, XPathExpressionException, SAXException, ParserConfigurationException
     {

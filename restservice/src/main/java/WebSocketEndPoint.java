@@ -3,6 +3,7 @@ import com.sentiments.analyzers.SentimentStrategy;
 import com.sentiments.analyzers.TweetWithSentiment;
 import com.sentiments.twitter.TwitterStreaming;
 import com.twitter.hbc.core.Client;
+import org.apache.xpath.operations.Bool;
 import org.json.JSONObject;
 
 import javax.websocket.*;
@@ -19,7 +20,7 @@ public class WebSocketEndPoint {
     }
 
     @OnMessage
-    private void notify(String handshake, Session session) throws IOException, InterruptedException {
+    private void updateClient(String handshake, Session session) throws IOException, InterruptedException {
         TwitterStreaming.getInstance();
         while (session.getOpenSessions().isEmpty() == false) {
             for (Session session1 : session.getOpenSessions()) {
@@ -37,6 +38,13 @@ public class WebSocketEndPoint {
                 }
             }
         }
+    }
+
+    public Boolean getUpdate(boolean updateFlag)
+    {
+        boolean flag;
+        flag = updateFlag;
+        return  flag;
     }
 
     /*

@@ -6,6 +6,7 @@ import java.util.Set;
 
 @ApplicationPath("/rest")
 public class RestApplication extends Application {
+
     final Set<Class<?>> classes = new HashSet<>();
 
     @Override
