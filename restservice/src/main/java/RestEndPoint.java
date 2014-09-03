@@ -1,6 +1,4 @@
-import com.sentiments.analyzers.Director;
-import com.sentiments.analyzers.DirectorInterface;
-import com.sentiments.analyzers.TweetWithSentiment;
+import com.sentiments.analyzers.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,7 +34,18 @@ public class RestEndPoint {
     private Iterator<TweetWithSentiment> getIterator(String keyword,String algorithm)
     {
         DirectorInterface director = new Director();
-        director.getSentiment(keyword,algorithm);
+        if(algorithm.equalsIgnoreCase("A"))
+        {
+            director.getSentiment(keyword,new AlchemyAlgorithmStrategy());
+        }else if(algorithm.equalsIgnoreCase("N"))
+        {
+            director.getSentiment(keyword, new NlpAlgorithmStrategy());
+        }else
+        {
+            IdolAlgorithmStrategy idolAlgorithmStrategy = IdolAlgorithmStrategy.getInstance();
+            director.getSentiment(keyword, idolAlgorithmStrategy);
+        }
+
         Iterator<TweetWithSentiment> iterator = director.createIterator();
         return iterator;
     }
