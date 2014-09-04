@@ -10,42 +10,41 @@ import java.util.Iterator;
 import java.util.List;
 
 @Path("/twitter")
-public class RestEndPoint {
-
-
+public class RestEndPoint
+{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/query")
     public Response Sentiment(@QueryParam("keyword") String keyword,
                               @QueryParam("algorithm") String algorithm)
     {
-        List<MetaTweet> tweetWithSentimentList = new ArrayList<>();
+        List<MetaTweet> metaTweetList = new ArrayList<>();
         Iterator<MetaTweet> iterator = getIterator(keyword, algorithm);
 
         while (iterator.hasNext())
         {
-            tweetWithSentimentList.add(iterator.next());
+            metaTweetList.add(iterator.next());
         }
-            return Response.ok(tweetWithSentimentList).build();
+            return Response.ok(metaTweetList).build();
     }
 
 
     /*
-    This method returns the iterator over the data structure
+    This method returns the iterator over the list of MetaTweet objects
      */
     private Iterator<MetaTweet> getIterator(String keyword,String algorithm)
     {
         DirectorInterface director = new Director();
         if(algorithm.equalsIgnoreCase("A"))
         {
-            director.getSentiment(keyword,new AlchemyAlgorithmStrategy());
+            director.calculateSentiment(keyword, new AlchemyAlgorithmStrategy());
         }else if(algorithm.equalsIgnoreCase("N"))
         {
-            director.getSentiment(keyword, new NlpAlgorithmStrategy());
+            director.calculateSentiment(keyword, new NlpAlgorithmStrategy());
         }else
         {
             IdolAlgorithmStrategy idolAlgorithmStrategy = IdolAlgorithmStrategy.getInstance();
-            director.getSentiment(keyword, idolAlgorithmStrategy);
+            director.calculateSentiment(keyword, idolAlgorithmStrategy);
         }
 
         Iterator<MetaTweet> iterator = director.createIterator();

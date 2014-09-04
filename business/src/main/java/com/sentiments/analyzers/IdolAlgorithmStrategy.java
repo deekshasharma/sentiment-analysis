@@ -39,7 +39,8 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
         {
             System.out.println("Encoding exception");
         }
-            WebTarget webTarget = client.target("https://api.idolondemand.com/1/api/sync/analyzesentiment/v1?text=" + encodedTweet + "&apikey=" + API_KEY);
+            WebTarget webTarget = client.target("https://api.idolondemand.com/1/api/sync/analyzesentiment/v1?text=" +
+                                  encodedTweet + "&apikey=" + API_KEY);
             Response response = webTarget.request().get();
             String result = response.readEntity(String.class);
             String sentiment = parseJSON(result);

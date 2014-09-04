@@ -21,9 +21,6 @@ public class AlchemyAlgorithmStrategy implements SentimentStrategy
 {
 
     private static final String API_KEY = "4d162d16826398e23c0d1eb17287bf1b06ca7492";
-//    private static final String API_KEY = "63f8b3d435204d533044873f1472f2e9bb739c84";
-
-
 
     @Override
     public MetaTweet getMetaTweet(String tweetText) {

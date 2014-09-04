@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public interface DirectorInterface {
 
-    public void getSentiment(String keyword, SentimentStrategy strategy);
+    public void calculateSentiment(String keyword, SentimentStrategy strategy);
     public Iterator<MetaTweet> createIterator();
 
 }

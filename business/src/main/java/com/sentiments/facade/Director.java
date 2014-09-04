@@ -12,19 +12,21 @@ import java.util.List;
 public class Director implements DirectorInterface
 {
         private static SentimentStrategy strategy;
-        private List<MetaTweet> tweetWithSentimentList = new ArrayList<>();
+        private List<MetaTweet> metaTweetList = new ArrayList<>();
+        private TwitterDataSet dataSet =  new TwitterDataSet();
 
 
         /*
-        This method returns the list of tweetWithSentiment objects for a given keyword.
+        This method calculate the sentiment for all tweets and save the MetaTweet object
+        in the metaTweetList
         */
-        public void getSentiment(String keyword, SentimentStrategy strategy)
+        public void calculateSentiment(String keyword, SentimentStrategy strategy)
         {
             try {
                 List<String> allTweets = getAllTweets(keyword);
                 for(String tweetText: allTweets)
                 {
-                    tweetWithSentimentList.add(strategy.getMetaTweet(tweetText));
+                    metaTweetList.add(strategy.getMetaTweet(tweetText));
                 }
             } catch (TwitterException t) {
                 System.out.println("Error due to TwitterException");
@@ -34,22 +36,9 @@ public class Director implements DirectorInterface
         }
 
         /*
-        This method returns all the Tweets for a specific keyword. It does not contain reTweets
-         */
-        private List<String> getTweetsFromTwitter(String keyword) throws TwitterException, IOException {
-            Twitter4J twitter4J = Twitter4J.getInstance();
-//        List<Status> tweets = twitter4J.getAllStatus(keyword);
-//        List<String> tweetText = twitter4J.getTweets(tweets);
-//        List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
-            List<String> tweetText = twitter4J.getData(keyword);
-            return tweetText;
-        }
-
-        /*
         This method returns a list of Tweets from the Twitter data set for a specific keyword
          */
         private List<String> getAllTweets(String keyword) throws TwitterException, IOException {
-            TwitterDataSet dataSet = new TwitterDataSet();
             return dataSet.getTweets(keyword);
         }
 
@@ -57,6 +46,26 @@ public class Director implements DirectorInterface
         This method returns an iterator over the List<tweetWithSentiment>
          */
         public Iterator<MetaTweet> createIterator() {
-            return new ListIterator(tweetWithSentimentList);
+            return new ListIterator(metaTweetList);
         }
+
+
+
+
+
+
+
+
+    /*
+       This method returns all the Tweets for a specific keyword. It does not contain reTweets
+        */
+    private List<String> getTweetsFromTwitter(String keyword) throws TwitterException, IOException {
+        Twitter4J twitter4J = Twitter4J.getInstance();
+//        List<Status> tweets = twitter4J.getAllStatus(keyword);
+//        List<String> tweetText = twitter4J.getTweets(tweets);
+//        List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
+        List<String> tweetText = twitter4J.getData(keyword);
+        return tweetText;
     }
+
+}

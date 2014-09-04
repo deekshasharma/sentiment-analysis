@@ -21,7 +21,7 @@
 //    /*
 //    This method returns the list of tweetWithSentiment objects for a given keyword.
 //    */
-//    public void getSentiment(String keyword, SentimentStrategy strategy)
+//    public void calculateSentiment(String keyword, SentimentStrategy strategy)
 //    {
 //        try {
 //            List<String> allTweets = getAllTweets(keyword);
