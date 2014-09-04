@@ -1,6 +1,6 @@
 package com.sentiments.analyzers;
 
-public class TweetWithSentiment{
+public class MetaTweet {
 
     private String tweetText;
     private String sentiment;
@@ -9,13 +9,13 @@ public class TweetWithSentiment{
     private String userName;
 
 
-    private TweetWithSentiment(TweetBuilder tweetBuilder)
+    private MetaTweet(MetaTweetBuilder metaTweetBuilder)
     {
-        this.tweetText = tweetBuilder.tweetText;
-        this.sentiment = tweetBuilder.sentiment;
-        this.geoTag = tweetBuilder.geoTag;
-        this.timestamp = tweetBuilder.timestamp;
-        this.userName = tweetBuilder.userName;
+        this.tweetText = metaTweetBuilder.tweetText;
+        this.sentiment = metaTweetBuilder.sentiment;
+        this.geoTag = metaTweetBuilder.geoTag;
+        this.timestamp = metaTweetBuilder.timestamp;
+        this.userName = metaTweetBuilder.userName;
     }
 
     public String getGeoTag() {
@@ -48,7 +48,7 @@ public class TweetWithSentiment{
     /*
         Inner Builder class to build tweet
      */
-    public static class TweetBuilder
+    public static class MetaTweetBuilder
     {
         private String tweetText;
         private String sentiment;
@@ -56,34 +56,34 @@ public class TweetWithSentiment{
         private String timestamp;
         private String userName;
 
-        public TweetBuilder(String tweetText, String sentiment)
+        public MetaTweetBuilder(String tweetText, String sentiment)
         {
             this.tweetText = tweetText;
             this.sentiment = sentiment;
         }
 
-        public TweetBuilder buildGeoTag(String geoTag)
+        public MetaTweetBuilder buildGeoTag(String geoTag)
         {
             this.geoTag = geoTag;
             return this;
         }
 
-        public TweetBuilder buildTimeStamp(String timestamp)
+        public MetaTweetBuilder buildTimeStamp(String timestamp)
         {
             this.timestamp = timestamp;
             return this;
         }
 
-        public TweetBuilder buildUserName(String userName)
+        public MetaTweetBuilder buildUserName(String userName)
         {
             this.userName = userName;
             return this;
         }
 
-        public TweetWithSentiment build()
+        public MetaTweet build()
         {
-            TweetWithSentiment tweetWithSentiment = new TweetWithSentiment(this);
-            return tweetWithSentiment;
+            MetaTweet metaTweet = new MetaTweet(this);
+            return metaTweet;
         }
     }
 

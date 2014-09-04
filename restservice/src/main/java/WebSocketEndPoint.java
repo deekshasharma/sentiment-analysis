@@ -1,9 +1,7 @@
+import com.sentiments.analyzers.MetaTweet;
 import com.sentiments.analyzers.NlpAlgorithmStrategy;
 import com.sentiments.analyzers.SentimentStrategy;
-import com.sentiments.analyzers.TweetWithSentiment;
 import com.sentiments.twitter.TwitterStreaming;
-import com.twitter.hbc.core.Client;
-import org.apache.xpath.operations.Bool;
 import org.json.JSONObject;
 
 import javax.websocket.*;
@@ -29,7 +27,7 @@ public class WebSocketEndPoint {
                         String tweetText = TwitterStreaming.parseJSON(tweet);
                         if(tweetText != null)
                         {
-                            TweetWithSentiment tweetWithSentiment = getSentiment(tweetText);
+                            MetaTweet tweetWithSentiment = getSentiment(tweetText);
                             JSONObject jsonObject = new JSONObject(tweetWithSentiment);
                             session1.getAsyncRemote().sendText(jsonObject.toString());
                         }
@@ -50,10 +48,10 @@ public class WebSocketEndPoint {
     /*
     This method gets the Sentiment using the NLP Algorithm
      */
-    private TweetWithSentiment getSentiment(String tweetText)
+    private MetaTweet getSentiment(String tweetText)
     {
         SentimentStrategy sentimentStrategy = new NlpAlgorithmStrategy();
-        return sentimentStrategy.getTweetWithSentiment(tweetText);
+        return sentimentStrategy.getMetaTweet(tweetText);
     }
 
     @OnError

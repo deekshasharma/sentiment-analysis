@@ -15,7 +15,7 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
     private Client client;
 
     /*
-    Returning Singleton instance of APIStrategy class to avoid creating connection objects repeatedly.
+    Returning Singleton instance of IdolAlgorithmStrategy class to avoid creating connection objects repeatedly.
      */
     public static IdolAlgorithmStrategy getInstance()
     {
@@ -31,10 +31,10 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
     }
 
     @Override
-    public TweetWithSentiment getTweetWithSentiment(String tweet) {
+    public MetaTweet getMetaTweet(String tweetText) {
         String encodedTweet = "";
         try {
-            encodedTweet = URLEncoder.encode(tweet, "UTF-8").replaceAll(" ", "%20");
+            encodedTweet = URLEncoder.encode(tweetText, "UTF-8").replaceAll(" ", "%20");
         }catch (UnsupportedEncodingException e)
         {
             System.out.println("Encoding exception");
@@ -44,8 +44,8 @@ public class IdolAlgorithmStrategy implements SentimentStrategy {
             String result = response.readEntity(String.class);
             String sentiment = parseJSON(result);
 
-            TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet, sentiment).build();
-            return tweetWithSentiment;
+            MetaTweet metaTweet = new MetaTweet.MetaTweetBuilder(tweetText, sentiment).build();
+            return metaTweet;
 
     }
 

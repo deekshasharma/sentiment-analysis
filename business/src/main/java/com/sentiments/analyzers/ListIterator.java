@@ -2,16 +2,16 @@ package com.sentiments.analyzers;
 import java.util.Iterator;
 import java.util.List;
 
-public class ListIterator implements Iterator<TweetWithSentiment>
+public class ListIterator implements Iterator<MetaTweet>
 {
 
-    private List<TweetWithSentiment> tweetWithSentimentList;
+    private List<MetaTweet> tweetWithSentimentList;
     int currentIndex = 0;
 
     /*
         Constructor of ListIterator class
     */
-    public ListIterator(List<TweetWithSentiment> tweetWithSentimentList)
+    public ListIterator(List<MetaTweet> tweetWithSentimentList)
     {
         this.tweetWithSentimentList = tweetWithSentimentList;
     }
@@ -28,9 +28,9 @@ public class ListIterator implements Iterator<TweetWithSentiment>
     }
 
     @Override
-    public TweetWithSentiment next()
+    public MetaTweet next()
     {
-        TweetWithSentiment tweetWithSentiment = tweetWithSentimentList.get(currentIndex);
+        MetaTweet tweetWithSentiment = tweetWithSentimentList.get(currentIndex);
         currentIndex += 1;
         return tweetWithSentiment;
     }

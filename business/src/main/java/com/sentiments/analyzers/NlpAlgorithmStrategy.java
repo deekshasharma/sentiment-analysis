@@ -11,7 +11,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class NlpAlgorithmStrategy implements SentimentStrategy {
     @Override
-    public TweetWithSentiment getTweetWithSentiment(String tweet)
+    public MetaTweet getMetaTweet(String tweetText)
     {
         //  Create a StanfordCoreNLP object to construct a pipeline using the given annotators
         Properties props = new Properties();
@@ -19,11 +19,11 @@ public class NlpAlgorithmStrategy implements SentimentStrategy {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
         int mainSentiment = 0;
-        if (tweet != null && tweet.length() > 0) {
+        if (tweetText != null && tweetText.length() > 0) {
             int longest = 0;
             // Runs the entire pipeline on the content of the given text passed and returns an Annotation object
             // Annotation represents text in a document and implement CoreMap
-            Annotation annotation = pipeline.process(tweet);
+            Annotation annotation = pipeline.process(tweetText);
             for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class))
             {
                 Tree tree = sentence.get(SentimentCoreAnnotations.AnnotatedTree.class);
@@ -38,12 +38,12 @@ public class NlpAlgorithmStrategy implements SentimentStrategy {
         if ( mainSentiment > 4 || mainSentiment < 0) {
             return null;
         }
-        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet,toText(mainSentiment)).build();
-        return tweetWithSentiment;
+        MetaTweet metaTweet = new MetaTweet.MetaTweetBuilder(tweetText,toText(mainSentiment)).build();
+        return metaTweet;
     }
 
     /*
-    This method returns the Text interpretation
+    This method returns the Text interpretation of sentiment scores
      */
     private String toText(int sentiment) {
         switch (sentiment) {

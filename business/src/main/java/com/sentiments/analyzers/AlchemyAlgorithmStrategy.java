@@ -26,11 +26,11 @@ public class AlchemyAlgorithmStrategy implements SentimentStrategy
 
 
     @Override
-    public TweetWithSentiment getTweetWithSentiment(String tweet) {
+    public MetaTweet getMetaTweet(String tweetText) {
         AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(API_KEY);
         String sentiment = null;
         try {
-            Document document = alchemyAPI.TextGetTextSentiment(tweet);
+            Document document = alchemyAPI.TextGetTextSentiment(tweetText);
             String xmlString = getStringFromDocument(document);
             sentiment = convertToDocumentObject(xmlString);
         } catch (SAXException e) {
@@ -42,8 +42,8 @@ public class AlchemyAlgorithmStrategy implements SentimentStrategy
         } catch (IOException e3) {
             System.out.println("Due to IOException");
         }
-        TweetWithSentiment tweetWithSentiment = new TweetWithSentiment.TweetBuilder(tweet,sentiment).build();
-        return tweetWithSentiment;
+        MetaTweet metaTweet = new MetaTweet.MetaTweetBuilder(tweetText,sentiment).build();
+        return metaTweet;
     }
 
 

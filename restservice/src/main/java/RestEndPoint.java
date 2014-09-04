@@ -1,4 +1,6 @@
 import com.sentiments.analyzers.*;
+import com.sentiments.facade.Director;
+import com.sentiments.facade.DirectorInterface;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,8 +19,8 @@ public class RestEndPoint {
     public Response Sentiment(@QueryParam("keyword") String keyword,
                               @QueryParam("algorithm") String algorithm)
     {
-        List<TweetWithSentiment> tweetWithSentimentList = new ArrayList<>();
-        Iterator<TweetWithSentiment> iterator = getIterator(keyword, algorithm);
+        List<MetaTweet> tweetWithSentimentList = new ArrayList<>();
+        Iterator<MetaTweet> iterator = getIterator(keyword, algorithm);
 
         while (iterator.hasNext())
         {
@@ -31,7 +33,7 @@ public class RestEndPoint {
     /*
     This method returns the iterator over the data structure
      */
-    private Iterator<TweetWithSentiment> getIterator(String keyword,String algorithm)
+    private Iterator<MetaTweet> getIterator(String keyword,String algorithm)
     {
         DirectorInterface director = new Director();
         if(algorithm.equalsIgnoreCase("A"))
@@ -46,7 +48,7 @@ public class RestEndPoint {
             director.getSentiment(keyword, idolAlgorithmStrategy);
         }
 
-        Iterator<TweetWithSentiment> iterator = director.createIterator();
+        Iterator<MetaTweet> iterator = director.createIterator();
         return iterator;
     }
 
