@@ -1,7 +1,7 @@
 package com.sentiments.facade;
 
 import com.sentiments.analyzers.*;
-import com.sentiments.twitter.Twitter4J;
+import com.sentiments.twitter.DataSource;
 import com.sentiments.twitter.TwitterDataSet;
 import twitter4j.TwitterException;
 import java.io.IOException;
@@ -13,11 +13,11 @@ public class Director implements DirectorInterface
 {
         private static SentimentStrategy strategy;
         private List<MetaTweet> metaTweetList = new ArrayList<>();
-        private TwitterDataSet dataSet =  new TwitterDataSet();
+        private DataSource dataSet =  new TwitterDataSet();
 
 
         /*
-        This method calculate the sentiment for all tweets and save the MetaTweet object
+        This method calculate the sentiment for all tweets and save each MetaTweet object
         in the metaTweetList
         */
         public void calculateSentiment(String keyword, SentimentStrategy strategy)
@@ -43,29 +43,10 @@ public class Director implements DirectorInterface
         }
 
         /*
-        This method returns an iterator over the List<tweetWithSentiment>
+        This method returns an iterator over the List<MetaTweet>
          */
         public Iterator<MetaTweet> createIterator() {
             return new ListIterator(metaTweetList);
         }
-
-
-
-
-
-
-
-
-    /*
-       This method returns all the Tweets for a specific keyword. It does not contain reTweets
-        */
-    private List<String> getTweetsFromTwitter(String keyword) throws TwitterException, IOException {
-        Twitter4J twitter4J = Twitter4J.getInstance();
-//        List<Status> tweets = twitter4J.getAllStatus(keyword);
-//        List<String> tweetText = twitter4J.getTweets(tweets);
-//        List<String> reTweetsRemoved = twitter4J.removeRetweets(tweetText);
-        List<String> tweetText = twitter4J.getData(keyword);
-        return tweetText;
-    }
 
 }

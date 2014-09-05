@@ -5,21 +5,21 @@ import java.util.List;
 public class ListIterator implements Iterator<MetaTweet>
 {
 
-    private List<MetaTweet> tweetWithSentimentList;
+    private List<MetaTweet> metaTweetList;
     int currentIndex = 0;
 
     /*
         Constructor of ListIterator class
     */
-    public ListIterator(List<MetaTweet> tweetWithSentimentList)
+    public ListIterator(List<MetaTweet> metaTweetList1)
     {
-        this.tweetWithSentimentList = tweetWithSentimentList;
+        this.metaTweetList = metaTweetList1;
     }
 
     @Override
     public boolean hasNext()
     {
-        if(currentIndex >= tweetWithSentimentList.size())
+        if(currentIndex >= metaTweetList.size())
         {
             return false;
         }
@@ -30,7 +30,7 @@ public class ListIterator implements Iterator<MetaTweet>
     @Override
     public MetaTweet next()
     {
-        MetaTweet tweetWithSentiment = tweetWithSentimentList.get(currentIndex);
+        MetaTweet tweetWithSentiment = metaTweetList.get(currentIndex);
         currentIndex += 1;
         return tweetWithSentiment;
     }

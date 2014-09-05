@@ -10,8 +10,9 @@ function twitterStream()
         var url = (port !== undefined) ? 'ws://' + document.location.host + port + document.location.pathname + 'tweets' :
           'ws://' + document.location.host + document.location.pathname + 'tweets';
         var connection = new WebSocket(url);
-          connection.onopen = function() {
-            connection.send('brazil');
+          connection.onopen = function()
+          {
+            connection.send('hello');
           };
           connection.onerror = function(error) {
             console.log('WebSocket Error ' + error);

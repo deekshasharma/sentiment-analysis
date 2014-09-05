@@ -18,7 +18,7 @@ public class WebSocketEndPoint {
     }
 
     @OnMessage
-    private void updateClient(String handshake, Session session) throws IOException, InterruptedException {
+    private void notifyObserver(String handshake, Session session) throws IOException, InterruptedException {
         TwitterStreaming.getInstance();
         while (session.getOpenSessions().isEmpty() == false) {
             for (Session session1 : session.getOpenSessions()) {
@@ -27,8 +27,8 @@ public class WebSocketEndPoint {
                         String tweetText = TwitterStreaming.parseJSON(tweet);
                         if(tweetText != null)
                         {
-                            MetaTweet tweetWithSentiment = getSentiment(tweetText);
-                            JSONObject jsonObject = new JSONObject(tweetWithSentiment);
+                            MetaTweet metaTweet = getSentiment(tweetText);
+                            JSONObject jsonObject = new JSONObject(metaTweet);
                             session1.getAsyncRemote().sendText(jsonObject.toString());
                         }
                 } catch (Exception e) {
@@ -38,12 +38,6 @@ public class WebSocketEndPoint {
         }
     }
 
-    public Boolean getUpdate(boolean updateFlag)
-    {
-        boolean flag;
-        flag = updateFlag;
-        return  flag;
-    }
 
     /*
     This method gets the Sentiment using the NLP Algorithm
